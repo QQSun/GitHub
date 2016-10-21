@@ -5,7 +5,6 @@
 //  Created by nachuan on 2016/10/20.
 //  Copyright © 2016年 nachuan. All rights reserved.
 //
-
 import UIKit
 
 //public extension UIBarButtonItem {
@@ -66,7 +65,7 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
         let identifier = "Cell";
         var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: identifier);
         if cell == nil {
-            cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: identifier);
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: identifier);
             cell!.textLabel!.text = "Swift";
         }
         return cell!;
