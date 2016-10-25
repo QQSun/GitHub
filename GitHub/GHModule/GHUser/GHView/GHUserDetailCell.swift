@@ -26,19 +26,19 @@ class GHUserDetailCell: GHTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier);
         self.selectionStyle = UITableViewCellSelectionStyle.none;
-        rankLabel = UILabel.createLabel(text: "1", font: UIFont.boldSystemFont(ofSize: 14), textColor: kTitleColor, textAlignment: nil);
+        rankLabel = UILabel.createLabel("1", font: UIFont.boldSystemFont(ofSize: 14), textColor: kTitleColor, textAlignment: nil);
         self.contentView.addSubview(rankLabel);
         
-        titleLabel = UILabel.createLabel(text: "MJRefresh", font: UIFont.boldSystemFont(ofSize: 14), textColor: kTitleColor, textAlignment: nil);
+        titleLabel = UILabel.createLabel("MJRefresh", font: UIFont.boldSystemFont(ofSize: 14), textColor: kTitleColor, textAlignment: nil);
         self.contentView.addSubview(titleLabel);
         
-        languageLabel = UILabel.createLabel(text: "Objective-C", font: nil, textColor: nil, textAlignment: nil);
+        languageLabel = UILabel.createLabel("Objective-C", font: nil, textColor: nil, textAlignment: nil);
         self.contentView.addSubview(languageLabel);
         
-        starLable = UILabel.createLabel(text: "star:3", font: nil, textColor: nil, textAlignment: nil);
+        starLable = UILabel.createLabel("star:3", font: nil, textColor: nil, textAlignment: nil);
         self.contentView.addSubview(starLable);
         
-        descriptionLabel = UILabel.createLabel(text: "miaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshimiaoshi", font: UIFont.boldSystemFont(ofSize: 12), textColor: nil, textAlignment: nil);
+        descriptionLabel = UILabel.createLabel("miaoshi", font: UIFont.boldSystemFont(ofSize: 12), textColor: nil, textAlignment: nil);
         descriptionLabel.numberOfLines = 2;
         self.contentView.addSubview(descriptionLabel);
         

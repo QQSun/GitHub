@@ -31,6 +31,9 @@ class GHTabBarController: UITabBarController {
         if Controller != nil {
             let controller: GHViewController = Controller!.init();
             controller.title = title;
+            if title == "用户" {
+                controller.navigationItem.title = "all languages";
+            }
             controller.tabBarItem.image = UIImage(named: imageNamed);
             let nav = GHNavigationController(rootViewController: controller);
             addChildViewController(nav);

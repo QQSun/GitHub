@@ -8,14 +8,16 @@
 import UIKit
 import SnapKit
 
-let kToolbarHeight: CGFloat = 40;
-let kListHeight = kScreenHeight - kToolbarHeight - kNavigationBarHeight;
+private let kToolbarHeight: CGFloat = 40;
+private let kListHeight = kScreenHeight - kToolbarHeight - kNavigationBarHeight;
 
 
-class GHUserViewController: GHViewController, UITableViewDataSource, UITableViewDelegate {
+
+
+class GHUserViewController: GHViewController, UITableViewDataSource, UITableViewDelegate, GHLanguageViewControllerDelegate {
 
     
-
+    
     var line = UIView();
     var selectedBtn: UIButton?;
     var cityBtn: UIButton?;
@@ -28,8 +30,6 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        
-        self.navigationItem.title = "all language";
         
         let cityItem = UIBarButtonItem.createBarButtonItem(_: "城市", imageNamed: nil, target: self, action:#selector(cityItemClicked(_: )), for: UIControlEvents.touchUpInside);
         self.navigationItem.leftBarButtonItem = cityItem;
@@ -157,6 +157,11 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
     
     func languageItemClicked(_ sender: UIButton) -> () {
         NSLog("language");
+        let language = GHLanguageViewController();
+        language.languageEntranceType = GHLanguageEntranceType.forUser;
+        language.delegate = self;
+        self.navigationController?.pushViewController(language, animated: true);
+        
     }
     
     func selectToolbarBtnClicked(sender: UIButton) -> () {
@@ -180,6 +185,14 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
         cityBtn!.setTitle(cityDic["city"] as? String, for: UIControlState.normal);
         countryBtn!.setTitle(cityDic["country"] as? String, for: UIControlState.normal);
     }
+    
+    //MARK: - 语言选择类代理
+    func selectLanguage(_ language: String?) {
+        if language != nil {
+            self.navigationItem.title = language;
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

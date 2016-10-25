@@ -21,7 +21,7 @@ class GHCityViewController: GHViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
     }
 
-    private func createUI() -> () {
+    fileprivate func createUI() -> () {
         let tableView = GHTableView();
         tableView.frame = self.view.bounds;
         tableView.delegate = self;

@@ -57,33 +57,33 @@ class GHUserDetailVC: GHViewController, UITableViewDelegate, UITableViewDataSour
         avatarImage.layer.masksToBounds = true;
         view.addSubview(avatarImage);
         
-        dateLabel = UILabel.createLabel(text: "2013-03-13", font: nil, textColor: nil, textAlignment: nil);
+        dateLabel = UILabel.createLabel("2013-03-13", font: nil, textColor: nil, textAlignment: nil);
         view.addSubview(dateLabel);
 
-        titleLabel = UILabel.createLabel(text: "GitHub", font: UIFont.boldSystemFont(ofSize: 14), textColor: kTitleColor, textAlignment: nil);
+        titleLabel = UILabel.createLabel("GitHub", font: UIFont.boldSystemFont(ofSize: 14), textColor: kTitleColor, textAlignment: nil);
         view.addSubview(titleLabel);
         
-        eMailLabel = UILabel.createLabel(text: "www.qq.com", font: nil, textColor: kHttpColor, textAlignment: nil);
+        eMailLabel = UILabel.createLabel("www.qq.com", font: nil, textColor: kHttpColor, textAlignment: nil);
         view.addSubview(eMailLabel);
         
-        subTitleLabel = UILabel.createLabel(text: "github", font: nil, textColor: nil, textAlignment: nil);
+        subTitleLabel = UILabel.createLabel("github", font: nil, textColor: nil, textAlignment: nil);
         view.addSubview(subTitleLabel);
         
-        weiboAddress = UILabel.createLabel(text: "www.weibo.com", font: nil, textColor: kHttpColor, textAlignment: nil);
+        weiboAddress = UILabel.createLabel("www.weibo.com", font: nil, textColor: kHttpColor, textAlignment: nil);
         view.addSubview(weiboAddress);
         
-        httpLabel = UILabel.createLabel(text: "www.person.com", font: nil, textColor: kHttpColor, textAlignment: nil);
+        httpLabel = UILabel.createLabel("www.person.com", font: nil, textColor: kHttpColor, textAlignment: nil);
         view.addSubview(httpLabel);
         
-        repositoryBtn = createBtn(title: "4\nRepository", tag: 10);
+        repositoryBtn = createBtn("4\nRepository", tag: 10);
         repositoryBtn.isSelected = true;
         selectedBtn = repositoryBtn;
         view.addSubview(repositoryBtn);
         
-        followBtn = createBtn(title: "0\nFollowing", tag: 11);
+        followBtn = createBtn("0\nFollowing", tag: 11);
         view.addSubview(followBtn);
         
-        followerBtn = createBtn(title: "333\nFollower", tag: 12);
+        followerBtn = createBtn("333\nFollower", tag: 12);
         view.addSubview(followerBtn);
         
         slipLine = UIView();
@@ -169,7 +169,7 @@ class GHUserDetailVC: GHViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-   private func createBtn(title: String, tag: Int) -> UIButton {
+   fileprivate func createBtn(_ title: String, tag: Int) -> UIButton {
         let btn = UIButton.init();
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14);
         btn.titleLabel?.numberOfLines = 2;
@@ -178,7 +178,7 @@ class GHUserDetailVC: GHViewController, UITableViewDelegate, UITableViewDataSour
         btn.setTitle(title, for: UIControlState.normal);
         btn.setTitleColor(kTitleColor, for: UIControlState.normal);
         btn.setTitleColor(kMainColor, for: UIControlState.selected);
-        btn.addTarget(self, action: #selector(selectBtnClicked(sender:)), for: UIControlEvents.touchUpInside);
+        btn.addTarget(self, action: #selector(selectBtnClicked(_: )), for: UIControlEvents.touchUpInside);
         return btn;
     }
     
@@ -213,7 +213,7 @@ class GHUserDetailVC: GHViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: - button
     
-    func selectBtnClicked(sender: UIButton) -> () {
+    func selectBtnClicked(_ sender: UIButton) -> () {
         
         if selectedBtn == sender {
             return;

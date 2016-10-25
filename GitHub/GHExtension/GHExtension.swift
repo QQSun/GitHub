@@ -27,7 +27,7 @@ public extension UIBarButtonItem {
 }
 
 public extension UILabel {
-    public class func createLabel(text: String, font: UIFont?, textColor: UIColor?, textAlignment: NSTextAlignment?) -> UILabel {
+    public class func createLabel(_ text: String, font: UIFont?, textColor: UIColor?, textAlignment: NSTextAlignment?) -> UILabel {
         let lable: UILabel = UILabel();
         lable.text = text;
         lable.font = font;

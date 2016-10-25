@@ -27,7 +27,7 @@ class GHCountryViewController: GHViewController,UITableViewDelegate, UITableView
         // Do any additional setup after loading the view.
     }
 
-    private func createUI() -> () {
+    fileprivate func createUI() -> () {
         
         
         countryArray = Array(countryDic.keys);
