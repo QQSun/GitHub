@@ -21,8 +21,7 @@ class GHNavigationController: UINavigationController {
         self.navigationBar.isTranslucent = false;
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white];
         self.navigationBar.barTintColor = kMainColor;
-        self.navigationBar.tintColor = kMainColor;
-        self.navigationBar.backgroundColor = kMainColor;
+        self.navigationBar.tintColor = UIColor.white;
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,6 +34,15 @@ class GHNavigationController: UINavigationController {
         // Do any additional setup after loading the view.
     }
 
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if (self.navigationController?.viewControllers.count)! > 0 {
+            viewController.hidesBottomBarWhenPushed = true;
+        }
+        super.pushViewController(viewController, animated: true);
+
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

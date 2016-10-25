@@ -13,7 +13,7 @@ class GHViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = kBGColor;
         // Do any additional setup after loading the view.
     }
 

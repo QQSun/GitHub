@@ -18,6 +18,8 @@ class GHTableView: UITableView {
     override public init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style);
         self.separatorStyle = UITableViewCellSeparatorStyle.singleLine;
+        self.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+        self.scrollIndicatorInsets = self.contentInset;
         
     }
     
