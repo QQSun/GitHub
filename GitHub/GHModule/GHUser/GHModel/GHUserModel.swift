@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class GHUserModel: GHModel {
+class GHUserModel: Mappable {
     var siteAdmin: Bool!
     var rank: Int!
     var userID: Int!
@@ -40,6 +41,31 @@ class GHUserModel: GHModel {
     var location: String?
     var email: String?
     var createdAt: String?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        siteAdmin <- map["site_admin"]
+        login <- map["login"]
+        avatarURL <- map["avatar_url"]
+        gravatarID <- map["gravatar_id"]
+        URL <- map["url"]
+        htmlURL <- map["html_url"]
+        followersURL <- map["followers_url"]
+        followingURL <- map["following_url"]
+        gistsURL <- map["gists_url"]
+        starredURL <- map["starred_url"]
+        subscriptionsURL <- map["subscriptions_url"]
+        orginizationsURL <- map["originizations_url"]
+        reposURL <- map["repos_url"]
+        eventsURL <- map["events_url"]
+        receivedEventsURL <- map["received_events_url"]
+        type <- map["type"]
+        score <- map["score"]
+    }
     
    
 }

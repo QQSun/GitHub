@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class GHTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {

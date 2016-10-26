@@ -7,6 +7,9 @@
 //
 import UIKit
 import SnapKit
+import Alamofire
+import SwiftyJSON
+import ObjectMapper
 
 private let kToolbarHeight: CGFloat = 40;
 private let kListHeight = kScreenHeight - kToolbarHeight - kNavigationBarHeight;
@@ -24,6 +27,13 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
     var countryBtn: UIButton?;
     var cityTableView: GHTableView?;
     var countryTableView: GHTableView?;
+    var swiftyJson: JSON = JSON.null
+    var infoArray: [GHUserModel]!;
+    
+    var location: String = "Beijing";
+    var page: Int = 1;
+    var language = "all languages";
+    
     
     
     
@@ -42,19 +52,21 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        infoArray = [GHUserModel]();
+        
         createSelectToolbar();
         createListView();
-
+        getUserLiset();
         NotificationCenter.default.addObserver(self, selector: #selector(selectCityResult(notification:)), name: NSNotification.Name(rawValue: "selectCityResult"), object: nil);
         
     }
 
+    
+    /// 创建toolbar.
     func createSelectToolbar() -> () {
         let view = UIView();
         self.view.addSubview(view);
-//        view.backgroundColor = UIColor.red;
-        
-        
+  
         cityBtn = createBtn(title: "beijing", view: view, target: self, action: #selector(selectToolbarBtnClicked(sender:)), for: UIControlEvents.touchUpInside, tag: 10);
         cityBtn!.isSelected = true;
         selectedBtn = cityBtn;
@@ -84,6 +96,8 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
         }
     }
     
+    
+    /// 创建city和country显示列表
     func createListView() -> () {
         let bgScrollView = UIScrollView();
         bgScrollView.isPagingEnabled = true;
@@ -130,7 +144,10 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
         var cell: GHUserCell? = tableView.dequeueReusableCell(withIdentifier: identifier) as? GHUserCell;
         if cell == nil {
             cell = GHUserCell(style: UITableViewCellStyle.default, reuseIdentifier: identifier);
-//            cell!.textLabel!.text = "Swift";
+        }
+        if infoArray.count != 0 {
+            cell!.setUserInfo(model: infoArray[indexPath.row]);
+            cell!.rankLabel?.text = NSString.init(format: "No.%zd", indexPath.row + 1) as String;
         }
         return cell!;
         
@@ -152,6 +169,7 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
         NSLog("city");
         let country = GHCountryViewController();
         self.navigationController?.pushViewController(country, animated: true);
+        getUserLiset();
         
     }
     
@@ -176,6 +194,9 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
         UIView.animate(withDuration: 0.25) {
             self.line.frame = CGRect.init(x: (CGFloat(sender.tag - 10)) * kScreenWidth_2, y: kToolbarHeight - 2, width: kScreenWidth_2, height: 2);
         };
+        location = sender.currentTitle!;
+        getUserLiset();
+        
     }
     
     func selectCityResult(notification: Notification) -> () {
@@ -184,14 +205,66 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
         
         cityBtn!.setTitle(cityDic["city"] as? String, for: UIControlState.normal);
         countryBtn!.setTitle(cityDic["country"] as? String, for: UIControlState.normal);
+        location = cityBtn!.currentTitle!;
+        page = 1;
+        getUserLiset();
     }
     
     //MARK: - 语言选择类代理
-    func selectLanguage(_ language: String?) {
-        if language != nil {
-            self.navigationItem.title = language;
+    func selectLanguage(_ selectLanguage: String?) {
+        if selectLanguage != nil {
+            
+            if language == selectLanguage! {
+                return;
+            }
+            self.navigationItem.title = selectLanguage;
+            language = selectLanguage!;
+            
+            
+            page = 1;
+            
+            getUserLiset();
         }
     }
+    
+    
+    //MARK: - connection
+    
+    func getUserLiset() -> () {
+        let URLString: String;
+        if language == "all languages" {
+            URLString = "https://api.github.com/search/users?q=location:" + location + "&sort=followers&page=" + String(page);
+        }else{
+            URLString = "https://api.github.com/search/users?q=location:" + location + "+" + "language:" + language + "&sort=followers&page=" + String(page);
+        }
+        print(URLString);
+        
+        Alamofire.request(URLString, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (DataResponse) in
+            if DataResponse.result.isFailure {
+                
+            } else {
+                if self.page == 1 {
+                    self.infoArray.removeAll();
+                }
+                self.swiftyJson = JSON.init(DataResponse.result.value!);
+//                print(self.swiftyJson);
+                let items = self.swiftyJson["items"].arrayValue
+                for var item in items {
+                    let dic: [String : Any]? = item.dictionaryObject
+                    if let tempDic = dic {
+                        let model: GHUserModel? = Mapper<GHUserModel>().map(JSON: tempDic);
+                        if model != nil {
+                            self.infoArray.append(model!);
+                        }
+                    }
+                }
+                self.cityTableView?.reloadData();
+            }
+        }
+        
+        
+    }
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -216,9 +289,3 @@ class GHUserViewController: GHViewController, UITableViewDataSource, UITableView
 
 }
 
-
-
-
-//extension GHUserViewController: UITableViewDataSource, UITableViewDelegate {
-//    
-//}

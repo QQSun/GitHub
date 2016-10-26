@@ -90,6 +90,10 @@ class GHUserDetailCell: GHTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func setUserDetailInfo(model: GHUserDetailModel) -> () {
+        
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

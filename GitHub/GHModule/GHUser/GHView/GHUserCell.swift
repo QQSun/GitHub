@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class GHUserCell: GHTableViewCell {
 
     var avatarImage: UIImageView?;
@@ -27,6 +26,7 @@ class GHUserCell: GHTableViewCell {
         avatarImage!.layer.cornerRadius = 5;
         avatarImage!.layer.masksToBounds = true;
         avatarImage!.backgroundColor = UIColor.red;
+        avatarImage!.image = UIImage(named: "user_default");
         
         self.contentView.addSubview(avatarImage!);
         
@@ -76,7 +76,12 @@ class GHUserCell: GHTableViewCell {
     }
     
     
-    
+    func setUserInfo(model: GHUserModel) -> () {
+        titleLabel!.text = model.login;
+        if model.avatarURL != nil {
+            avatarImage?.kf.setImage(with: URL.init(string: model.avatarURL!), placeholder: UIImage.init(named: "user_default"), options: nil, progressBlock: nil, completionHandler: nil);
+        }
+    }
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {

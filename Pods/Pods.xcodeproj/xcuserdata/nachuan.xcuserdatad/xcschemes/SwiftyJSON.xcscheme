@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1DE93A359FA21F91DFBE81309E851A4A"
-               BuildableName = "Kingfisher.framework"
-               BlueprintName = "Kingfisher"
+               BlueprintIdentifier = "577F791A8F934AF042051613EFA5305A"
+               BuildableName = "SwiftyJSON.framework"
+               BlueprintName = "SwiftyJSON"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1DE93A359FA21F91DFBE81309E851A4A"
-            BuildableName = "Kingfisher.framework"
-            BlueprintName = "Kingfisher"
+            BlueprintIdentifier = "577F791A8F934AF042051613EFA5305A"
+            BuildableName = "SwiftyJSON.framework"
+            BlueprintName = "SwiftyJSON"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

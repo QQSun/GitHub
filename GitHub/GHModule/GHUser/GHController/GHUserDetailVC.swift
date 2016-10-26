@@ -48,6 +48,8 @@ class GHUserDetailVC: GHViewController, UITableViewDelegate, UITableViewDataSour
     
     }
 
+    
+    /// 创建tableView的表头视图
     func createTableHeaderView() -> UIView {
         let view = UIView.init(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kTableHeaderViewHeight));
         view.backgroundColor = UIColor.white;
@@ -96,6 +98,8 @@ class GHUserDetailVC: GHViewController, UITableViewDelegate, UITableViewDataSour
         return view;
     }
     
+    
+    /// 创建约束.约束表头视图
     func createConstraints() -> () {
         avatarImage.snp.makeConstraints { (make) in
             make.left.top.equalTo(10);
